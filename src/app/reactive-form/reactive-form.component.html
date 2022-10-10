@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form [formGroup]="reactiveForm" (ngSubmit)="apply()">
+            <!-- Header -->
+            <h1 class="mt-3 display-4 text-center">Angular Reactive Forms</h1>
+            
+
+            <!-- UserName Field -->
+            <div class="my-3">
+                <label for="userName" class="form-label">UserName</label>
+                <input id="userName" type="text" class="form-control" formControlName="userName"
+                [ngClass]="{'inValidColor is-invalid':isInValid('userName'),'validColor is-valid':isValid('userName')}">
+            </div>
+            <div class="alert alert-warning" *ngIf="isInValid('userName')">
+                <strong>Attention!</strong> UserName field is required
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="text" class="form-control" formControlName="password"
+                [ngClass]="{'inValidColor is-invalid':isInValid('password'),'validColor is-valid':isValid('password')}">
+            </div>
+            <div class="alert alert-warning" *ngIf="isInValid('password')">
+                <span *ngIf="reactiveForm.get('password')?.errors?.['required']"><strong>Attention!</strong> Password field
+                    is required</span>
+                <span *ngIf="reactiveForm.get('password')?.errors?.['minlength']"><strong>Attention!</strong> Password must
+                    be at least 4 characters</span>
+            </div>
+
+            <!-- Country Field -->
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <select id="country" class="form-select" formControlName="country" [ngClass]="{'inValidColor is-invalid':isInValid('country'),'validColor is-valid':isValid('country')}">
+                    <option value="" >Open this select menu</option>
+                    <option value="{{item.value}}" *ngFor="let item of countries">{{item.text}}</option>
+                </select>
+            </div>
+            <div class="alert alert-warning" *ngIf="isInValid('country')">
+                <strong>Attention!</strong> Country field is required
+            </div>
+
+            <!-- Gender Field -->
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <div class="form-check" *ngFor="let item of genders">
+                    <label for="gender_{{item.value}}" class="form-check-label"> {{item.text}}</label>
+                    <input id="gender_{{item.value}}" type="radio" value="{{item.value}}" class="form-check-input"
+                        formControlName="gender">
+                </div>
+            </div>
+
+            <!-- I Agree Field-->
+            <div class="form-check mb-3">
+                <label for="iAgree" class="form-check-label">I Agree</label>
+                <input id="iAgree" type="checkbox" class="form-check-input" formControlName="iAgree">
+            </div>
+
+            <!-- Button -->
+            <button class="btn btn-primary">Apply</button>
+        </form>
+    </div>
+</div>

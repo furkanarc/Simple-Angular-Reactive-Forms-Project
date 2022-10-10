@@ -1,0 +1,6 @@
+.inValidColor{
+    border-left: 5px solid #dc3545;
+}
+.validColor{
+    border-left: 5px solid #198754;
+}
